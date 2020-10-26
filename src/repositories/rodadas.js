@@ -18,9 +18,9 @@ const atualizarRodadas = async (jogo) => {
 	const { id, gols_casa, gols_visitante } = jogo;
 	const query = `
 	UPDATE jogos 
-	SET gols_casa $1,
-	gols_visitante = $1 
-	WHERE id = $3
+	SET gols_casa = $1,
+	gols_visitante = $2 
+	WHERE id = $3;
 	`;
 	const result = await database.query({
 		text: query,
