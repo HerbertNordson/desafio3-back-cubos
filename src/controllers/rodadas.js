@@ -8,4 +8,25 @@ const rodadas = async (ctx) => {
 	return response(ctx, 200, result);
 }
 
-module.exports = { rodadas };
+const atualizarRodada = async (ctx) => {
+    const {
+        id = null,
+        gols_casa = null,
+        gols_visitante = null,
+    } = ctx.request.body;
+    if (id) {
+        const result = await Rodadas.pegarUmaRodada(id);
+        if (result) {
+            const jogoAtualizado = { gols_casa, gols_visitante };
+            const jogofinal = await Rodadas.atualizarRodadas(jogoAtualizado);
+
+            return response(ctx, 200, jogofinal);
+        }
+    }
+    return response(ctx, 400, { mensagem: 'Error' });
+};
+
+module.exports = { 
+	rodadas, 
+	atualizarRodada
+ };

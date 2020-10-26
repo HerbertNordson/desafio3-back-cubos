@@ -2,6 +2,11 @@ const Usuarios = require("../repositories/usuarios");
 const { response } = require('../controllers/response');
 
 const obterUsuarios = async (ctx) => {
+	const result = await Autores.obterAutores();
+	return response(ctx, 200, result);
+};
+
+const obterUsuario = async (ctx) => {
 	const { id = null } = ctx.params;
     if (id) {
         const result = await Usuarios.obterUsuarios(id);
@@ -26,6 +31,7 @@ const obterUsuariosPorEmail = async (ctx) => {
 };
 
 module.exports = {
-	 obterUsuarios,
-	 obterUsuariosPorEmail 
+	 obterUsuario,
+	 obterUsuariosPorEmail,
+	 obterUsuarios
 };

@@ -3,12 +3,12 @@ const router = new Router();
 
 const Classificacao = require('./controllers/classificacao');
 const Rodadas = require('./controllers/rodadas');
-// const Usuarios = require('./controllers/usuarios');
 const Auth = require('./controllers/auth');
+const Session = require('./middlewares/session')
 
-
-router.get("/classificacao", Classificacao.classificacao);
-router.get(`/jogos/:rodada`, Rodadas.rodadas);
-router.post("/auth", Auth.autenticar);
+router.get('/classificacao', Classificacao.classificacao);
+router.get('/jogos/:rodada', Rodadas.rodadas);
+router.post('/auth', Auth.autenticar);
+router.post('/jogos', Session.verify, Rodadas.atualizarRodada);
 
 module.exports = router;
