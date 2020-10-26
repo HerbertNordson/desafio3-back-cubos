@@ -1,15 +1,14 @@
 const Koa = require('koa');
+const Cors = require('@koa/cors');
 const bodyparser = require('koa-bodyparser');
-
-require('dotenv').config();
-
-const PORT = process.env.PORT || 8000;
-
 const server = new Koa();
 const router = require('./src/routes');
+const Logger = require('./src/middlewares/logger');
+
 
 server.use(bodyparser());
+server.use(Cors());
+server.use(Logger);
 
 server.use(router.routes());
-
-server.listen(PORT, () => console.log('Rodando na porta:', PORT));
+server.listen(8081, () => console.log('Rodando '));
